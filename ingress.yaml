@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: moviez-ingress
+  namespace: moviez
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: moviez.example.com
+      http:
+        paths:
+
+          # Backend API
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: movie-backend
+                port:
+                  number: 5000
+
+          # Frontend
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: movie-frontend
+                port:
+                  number: 80
