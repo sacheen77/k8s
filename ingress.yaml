@@ -3,25 +3,13 @@ kind: Ingress
 metadata:
   name: moviez-ingress
   namespace: moviez
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
-    - host: moviez.example.com
+    - host: moviezlist.site
       http:
         paths:
-
-          # Backend API
-          - path: /api(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: movie-backend
-                port:
-                  number: 5000
-
-          # Frontend
+          # -------- FRONTEND --------
           - path: /
             pathType: Prefix
             backend:
@@ -29,3 +17,4 @@ spec:
                 name: movie-frontend
                 port:
                   number: 80
+

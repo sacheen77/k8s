@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 551529689604.dkr.ecr.us-east-1.amazonaws.com/movie-frontend:latest
+          image: public.ecr.aws/p3h2q3u4/moviez/frontend:latest
           ports:
             - containerPort: 80
           env:
